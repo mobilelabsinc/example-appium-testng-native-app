@@ -1,15 +1,3 @@
-# example-appium-testng-native-app
-Example Appium project using TestNG to allow for parallel cross platform testing
-
-## Prerequisites 
-
-Upload both the Android and iOS PhoneLookup applications to your deviceConnect cart.
-
-## Execution of the sample
-
-To execute these tests, you'll need to rename deviceconnect.properties.default to deviceconnect.properties. Once renamed, you'll need to fill in the following information:
-
-```
 # The deviceConnect server URL
 # i.e. http://192.0.2.0/Appium
 deviceconnect.url=
@@ -38,10 +26,4 @@ android.ids=
 # The bundleId, and Activity, for your Android application
 # i.e. sample.company.App/SampleActivity
 android.bundle.id=
-```
-
-Run the tests with your IDEs test runner or:
-
-`mvn test`
-
 
