@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestPhoneLookup" thread-count="100" verbose="1" parallel="instances"
+       data-provider-thread-count="100" annotations="JDK">
+    <test name="TestPhoneLookup">
+        <classes>
+            <class name="TestPhoneLookup"/>
+        </classes>
+    </test>
+</suite>
