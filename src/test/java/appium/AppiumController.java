@@ -8,6 +8,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class AppiumController {
     protected AppiumDriver driver;
@@ -58,6 +59,8 @@ public class AppiumController {
                 driver = new AndroidDriver<MobileElement>(new URL(server), capabilities);
                 break;
         }
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     public void stopAppium() throws Exception {

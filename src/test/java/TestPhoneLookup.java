@@ -27,7 +27,7 @@ public class TestPhoneLookup extends AppiumController {
     private final static String ANDROID_IDS = "android.ids";
     private final static String ANDROID_BUNDLE_ID = "android.bundle.id";
     private final static String ANDROID_PLATFORM_NAME = "ANDROID";
-    private final static String ANDROID_AUTOMATION_NAME = "Appium";
+    private final static String ANDROID_AUTOMATION_NAME = "UiAutomator2";
 
     protected LoginScreen loginScreen;
     protected SearchScreen searchScreen;
