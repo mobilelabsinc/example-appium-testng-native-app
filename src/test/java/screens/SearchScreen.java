@@ -6,53 +6,55 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class SearchScreen extends PhoneLookupScreen {
     @iOSFindBy(xpath = "(//XCUIElementTypeButton[@name='Search'])[1]")
-    @AndroidFindBy(id = "com.android.controls:id/searchButton")
+    @AndroidFindBy(id = "search_search_button")
     private MobileElement searchButton;
 
     @iOSFindBy(xpath = "//XCUIElementTypeTextField[@name='Item ID or Item Name']")
-    @AndroidFindBy(id = "com.android.controls:id/criteria1EditText")
+    @AndroidFindBy(id = "search_item_name_edit")
     private MobileElement itemNameField;
 
     @iOSFindBy(xpath = "//XCUIElementTypeTextField[@name='Manufacturer']")
-    @AndroidFindBy(id = "com.android.controls:id/searchSpinner")
+    @AndroidFindBy(id = "search_manufacturer_spinner")
     private MobileElement manufacturerField;
 
     @iOSFindBy(xpath = "//XCUIElementTypeSwitch[@label='iOS']")
-    @AndroidFindBy(id = "com.android.controls:id/criteria3RadioButton3")
+    @AndroidFindBy(id = "search_os_ios_checkbox")
     private MobileElement iOSOperatingSystemItem;
 
     @iOSFindBy(xpath = "//XCUIElementTypeSwitch[@label='Android']")
-    @AndroidFindBy(id = "com.android.controls:id/criteria3RadioButton1")
+    @AndroidFindBy(id = "search_os_android_checkbox")
     private MobileElement androidOperatingSystemItem;
 
     @iOSFindBy(xpath = "//XCUIElementTypeSwitch[@label='Windows']")
-    @AndroidFindBy(id = "com.android.controls:id/criteria3RadioButton2")
+    @AndroidFindBy(id = "search_os_blackberry_checkbox")
     private MobileElement windowsOperatingSystemItem;
 
     @iOSFindBy(xpath = "//XCUIElementTypeSwitch[@label='BlackBerry']")
-    @AndroidFindBy(id = "com.android.controls:id/criteria3RadioButton4")
+    @AndroidFindBy(id = "search_os_windows_checkbox")
     private MobileElement blackBerryOperatingSystemItem;
 
     @iOSFindBy(xpath = "//XCUIElementTypeButton[@label='All']")
-    @AndroidFindBy(id = "com.android.controls:id/criteria4RadioButton3")
+    @AndroidFindBy(id = "search_inventory_all_radio_button")
     private MobileElement allInventoryLevel;
 
     @iOSFindBy(xpath = "//XCUIElementTypeButton[@label='In Stock']")
-    @AndroidFindBy(id = "com.android.controls:id/criteria4RadioButton1")
+    @AndroidFindBy(id = "search_inventory_in_stock_radio_button")
     private MobileElement inStockInventoryLevel;
 
     @iOSFindBy(xpath = "//XCUIElementTypeButton[@label='Out of Stock']")
-    @AndroidFindBy(id = "com.android.controls:id/criteria4RadioButton2")
+    @AndroidFindBy(id = "search_inventory_out_of_stock_radio_button")
     private MobileElement outOfStockInventoryLevel;
 
-    public SearchScreen(AppiumDriver driver) {
-        super(driver);
+    public SearchScreen(AppiumDriver driver, WebDriverWait wait) {
+        super(driver, wait);
     }
 
     public Boolean isSearchButtonPresent() {
@@ -128,6 +130,12 @@ public class SearchScreen extends PhoneLookupScreen {
 
             MobileElement picker = (MobileElement) driver.findElement(By.className("XCUIElementTypePickerWheel"));
 
+            picker.setValue(manufacturer);
+
+            /*
+            //USE THIS CODE IF YOUR PICKER USES VIEWS INSTEAD OF STRINGS
+            //SEE https://github.com/appium/appium/issues/6962#issuecomment-264732117
+            //
             //Move to the first item Any as the default is Apple and the picker is fixed
             JavascriptExecutor js = driver;
             Map<String, Object> params = new HashMap<>();
@@ -145,14 +153,18 @@ public class SearchScreen extends PhoneLookupScreen {
                 params.put("element", picker.getId());
                 js.executeScript("mobile: selectPickerWheelValue", params);
                 lastValue = picker.getAttribute("value");
-            }
+            }*/
 
             hideKeyboard();
 
         }
         else if (getPlatform().equals("ANDROID")) {
             manufacturerField.click();
-            driver.findElementByXPath(".//*[@text='" + manufacturer + "']").click();
+            MobileElement manufacturerItem = (MobileElement)wait.until(ExpectedConditions.presenceOfElementLocated(By
+                    .xpath
+                    ("//android.widget.CheckedTextView[@text='" + manufacturer + "']")));
+
+            manufacturerItem.click();
         }
     }
 

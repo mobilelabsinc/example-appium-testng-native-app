@@ -6,6 +6,7 @@ import org.testng.annotations.*;
 
 
 import screens.LoginScreen;
+import screens.SearchResultsScreen;
 import screens.SearchScreen;
 import java.io.File;
 import java.io.FileReader;
@@ -31,6 +32,7 @@ public class TestPhoneLookup extends AppiumController {
 
     protected LoginScreen loginScreen;
     protected SearchScreen searchScreen;
+    protected SearchResultsScreen searchResultsScreen;
 
     @Factory (dataProvider = "deviceList")
     public TestPhoneLookup(String udid, String platformName,
@@ -74,8 +76,9 @@ public class TestPhoneLookup extends AppiumController {
     public void setUp() throws Exception {
         startAppium();
 
-        loginScreen = new LoginScreen(driver);
-        searchScreen = new SearchScreen(driver);
+        loginScreen = new LoginScreen(driver, wait);
+        searchScreen = new SearchScreen(driver, wait);
+        searchResultsScreen = new SearchResultsScreen(driver, wait);
     }
 
     @Test
@@ -84,7 +87,6 @@ public class TestPhoneLookup extends AppiumController {
     @Description("Verifies that the Search Button appears on the Search Screen after entering the username and password and then clicking the Sign In button on the login screen")
     public void loginTest() throws Exception {
         try {
-            getScreenshot("Launch Screen");
             loginScreen.login("mobilelabs", "demo");
             Assert.assertTrue(searchScreen.isSearchButtonPresent());
             getScreenshot("Search Screen");
@@ -102,8 +104,8 @@ public class TestPhoneLookup extends AppiumController {
     @Description("Verifies that the list of items is returned after filling out the search form")
     public void searchTest() throws Exception {
         try {
-            getScreenshot("Login Screen");
             searchScreen.fillSearchForm("Droid Charge", "Samsung", true, true, false, false, "In Stock");
+            Assert.assertTrue(searchResultsScreen.isSearchResultListPresent());
             getScreenshot("Search Results");
         } catch (Exception ex) {
 

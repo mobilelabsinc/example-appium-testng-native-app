@@ -5,17 +5,20 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public abstract class PhoneLookupScreen {
 
     protected final AppiumDriver driver;
+    protected final WebDriverWait wait;
 
-    public PhoneLookupScreen(AppiumDriver driver) {
+    public PhoneLookupScreen(AppiumDriver driver, WebDriverWait wait) {
         this.driver = driver;
+        this.wait = wait;
 
-        PageFactory.initElements(new AppiumFieldDecorator(driver, 15, TimeUnit.SECONDS), this);
+        PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
     }
 
     public String getPlatform(){
