@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginScreen extends PhoneLookupScreen {
@@ -23,19 +24,23 @@ public class LoginScreen extends PhoneLookupScreen {
         super(driver, wait);
     }
 
+    @Step("Enter username")
     private void enterUserName(String username){
         usernameField.sendKeys(username);
         hideKeyboard();
     }
 
+    @Step("Enter password")
     private void enterPassword(String password){
         passwordField.sendKeys(password);
         hideKeyboard();
     }
 
+    @Step("Click SignIn button")
     private void clickSignIn(){
         signInButton.click();
     }
+
 
     public void login (String username, String password) throws Exception {
         enterUserName(username);

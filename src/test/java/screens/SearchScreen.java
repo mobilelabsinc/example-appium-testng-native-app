@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -57,6 +58,7 @@ public class SearchScreen extends PhoneLookupScreen {
         super(driver, wait);
     }
 
+    @Step("Verify Search button displayed")
     public Boolean isSearchButtonPresent() {
         if (searchButton.isDisplayed()) {
             return true;
@@ -65,6 +67,7 @@ public class SearchScreen extends PhoneLookupScreen {
         return false;
     }
 
+    @Step("Enter the Item Name")
     private void enterItemName(String itemNameText) {
         itemNameField.sendKeys(itemNameText);
         if (getPlatform().equalsIgnoreCase("Android")){
@@ -72,6 +75,7 @@ public class SearchScreen extends PhoneLookupScreen {
         }
     }
 
+    @Step("Select iOS Operating System")
     private void selectiOSOperatingSystemItem() {
         if (getPlatform().equalsIgnoreCase("IOS")){
             if (iOSOperatingSystemItem.getAttribute("value").equalsIgnoreCase("0")) {
@@ -85,6 +89,7 @@ public class SearchScreen extends PhoneLookupScreen {
         }
     }
 
+    @Step("Select Android Operating System")
     private void selectAndroidOperatingSystemItem() {
         if (getPlatform().toUpperCase().equals("IOS")){
             if (androidOperatingSystemItem.getAttribute("value").equalsIgnoreCase("0")) {
@@ -98,6 +103,7 @@ public class SearchScreen extends PhoneLookupScreen {
         }
     }
 
+    @Step("Select Windows Operating System")
     private void selectWindowsOperatingSystemItem() {
         if(getPlatform().equalsIgnoreCase("IOS")){
             if (windowsOperatingSystemItem.getAttribute("value").equalsIgnoreCase("0")) {
@@ -111,6 +117,7 @@ public class SearchScreen extends PhoneLookupScreen {
         }
     }
 
+    @Step("Select BlackBerry Operating System")
     private void selectBlackBerryOperatingSystemItem() {
         if(getPlatform().equalsIgnoreCase("IOS")){
             if (blackBerryOperatingSystemItem.getAttribute("value").equalsIgnoreCase("0")) {
@@ -124,6 +131,7 @@ public class SearchScreen extends PhoneLookupScreen {
         }
     }
 
+    @Step("Select Manufacturer")
     private void selectManufacturer(String manufacturer){
         if (getPlatform().equals("IOS")) {
             manufacturerField.click();
@@ -168,6 +176,7 @@ public class SearchScreen extends PhoneLookupScreen {
         }
     }
 
+    @Step("Select Inventory Level")
     private void selectInventoryLevel(String inventoryLevel){
 
        if (inventoryLevel.toUpperCase().equals("ALL")) {
@@ -180,6 +189,12 @@ public class SearchScreen extends PhoneLookupScreen {
            outOfStockInventoryLevel.click();
        }
     }
+
+    @Step("Click Search Button")
+    private void clickSearchButton() {
+        searchButton.click();
+    }
+
 
     public void fillSearchForm (String itemName, String manufacturer, Boolean setiOS, Boolean setAndroid, Boolean
             setWindows, Boolean setBlackberry, String inventoryLevel ){
@@ -211,6 +226,6 @@ public class SearchScreen extends PhoneLookupScreen {
             selectInventoryLevel(inventoryLevel);
         }
 
-        searchButton.click();
+        clickSearchButton();
     }
 }
