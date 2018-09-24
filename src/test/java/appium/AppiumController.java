@@ -5,12 +5,15 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class AppiumController {
     protected AppiumDriver driver;
+    protected WebDriverWait wait;
     private DesiredCapabilities capabilities;
 
     //deviceConnect Information
@@ -58,6 +61,9 @@ public class AppiumController {
                 driver = new AndroidDriver<MobileElement>(new URL(server), capabilities);
                 break;
         }
+
+        wait = new WebDriverWait(driver, 10);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public void stopAppium() throws Exception {
