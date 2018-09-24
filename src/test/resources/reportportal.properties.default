@@ -1,0 +1,6 @@
+rp.endpoint = YOUR REPORT PORTAL URL
+rp.uuid = YOUR_UUID
+rp.launch = PHONELOOKUP JAVA
+rp.project = YOUR_PROJECT
+#rp.batch.size.logs=10
+rp.convertimage=false

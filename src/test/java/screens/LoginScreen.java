@@ -28,17 +28,21 @@ public class LoginScreen extends PhoneLookupScreen {
     private void enterUserName(String username){
         usernameField.sendKeys(username);
         hideKeyboard();
+        logger.info("Enter username: {}", username);
     }
 
     @Step("Enter password")
     private void enterPassword(String password){
         passwordField.sendKeys(password);
         hideKeyboard();
+        logger.info("Enter password: {}", password);
     }
 
     @Step("Click SignIn button")
     private void clickSignIn(){
+
         signInButton.click();
+        logger.info("Click Sign In button");
     }
 
 

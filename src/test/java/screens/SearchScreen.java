@@ -7,6 +7,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -60,11 +61,15 @@ public class SearchScreen extends PhoneLookupScreen {
 
     @Step("Verify Search button displayed")
     public Boolean isSearchButtonPresent() {
-        if (searchButton.isDisplayed()) {
+        logger.info("Verify Search button displayed");
+
+        try {
+            searchButton.getId();
             return true;
         }
-
-        return false;
+        catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     @Step("Enter the Item Name")
@@ -73,6 +78,8 @@ public class SearchScreen extends PhoneLookupScreen {
         if (getPlatform().equalsIgnoreCase("Android")){
             hideKeyboard();
         }
+        logger.info("Enter the Item Name: {}", itemNameText);
+
     }
 
     @Step("Select iOS Operating System")
@@ -87,6 +94,8 @@ public class SearchScreen extends PhoneLookupScreen {
                 iOSOperatingSystemItem.click();
             }
         }
+
+        logger.info("Select iOS Operating System");
     }
 
     @Step("Select Android Operating System")
@@ -101,6 +110,7 @@ public class SearchScreen extends PhoneLookupScreen {
                 androidOperatingSystemItem.click();
             }
         }
+        logger.info("Select Android Operating System");
     }
 
     @Step("Select Windows Operating System")
@@ -115,6 +125,8 @@ public class SearchScreen extends PhoneLookupScreen {
                 windowsOperatingSystemItem.click();
             }
         }
+
+        logger.info("Select Windows Operating System");
     }
 
     @Step("Select BlackBerry Operating System")
@@ -129,6 +141,8 @@ public class SearchScreen extends PhoneLookupScreen {
                 blackBerryOperatingSystemItem.click();
             }
         }
+
+        logger.info("Select BlackBerry Operating System");
     }
 
     @Step("Select Manufacturer")
@@ -174,6 +188,8 @@ public class SearchScreen extends PhoneLookupScreen {
 
             manufacturerItem.click();
         }
+
+        logger.info("Select manufacturer: {}", manufacturer);
     }
 
     @Step("Select Inventory Level")
@@ -188,11 +204,15 @@ public class SearchScreen extends PhoneLookupScreen {
        else if (inventoryLevel.toUpperCase().equals("OUT OF STOCK")) {
            outOfStockInventoryLevel.click();
        }
+
+        logger.info("Select inventory level: {}", inventoryLevel);
     }
 
     @Step("Click Search Button")
     private void clickSearchButton() {
+
         searchButton.click();
+        logger.info("Click Search button");
     }
 
 

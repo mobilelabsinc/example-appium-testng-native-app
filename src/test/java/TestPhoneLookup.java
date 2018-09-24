@@ -1,11 +1,15 @@
 import appium.AppiumController;
 import io.qameta.allure.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 
+import rp.com.google.common.io.BaseEncoding;
 import screens.LoginScreen;
+import screens.PhoneLookupScreen;
 import screens.SearchResultsScreen;
 import screens.SearchScreen;
 import java.io.File;
@@ -15,6 +19,8 @@ import java.util.*;
 
 
 public class TestPhoneLookup extends AppiumController {
+    protected static Logger logger = LogManager.getLogger(TestPhoneLookup.class);
+
     private final static String DEVICECONNECT_PROPERTIES_FILE = "deviceconnect.properties";
     private final static String DEVICECONNECT_URL = "deviceconnect.url";
     private final static String DEVICECONNECT_USERNAME = "deviceconnect.username";
@@ -123,7 +129,11 @@ public class TestPhoneLookup extends AppiumController {
     @Attachment(value = "{attachmentName}", type = "image/png")
     public byte[] getScreenshot(String attachmentName) throws Exception {
         // make screenshot and get is as base64
-        return driver.getScreenshotAs(OutputType.BYTES);
+        byte[] screenshot = driver.getScreenshotAs(OutputType.BYTES);
+
+        logger.info("RP_MESSAGE#BASE64#{}#{}", BaseEncoding.base64().encode(screenshot), attachmentName);
+
+        return screenshot;
     }
 
     private static void buildDeviceList(List<Object[]> list, String deviceList, String bundleId,
