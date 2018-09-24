@@ -101,3 +101,5 @@ deviceConnect.properties
 *.iml
 
 example-appium-testng-native-app.iml
+*.properties
+src/test/resources/reportportal.properties

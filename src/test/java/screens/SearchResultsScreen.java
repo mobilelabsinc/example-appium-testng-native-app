@@ -19,6 +19,8 @@ public class SearchResultsScreen extends PhoneLookupScreen {
     }
 
     public Boolean isSearchResultListPresent(){
+        logger.info("Verify results list is displayed");
+
         try {
             searchResultsList.getId();
             return true;

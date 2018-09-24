@@ -20,8 +20,30 @@
         <mavencompiler.version>3.8.0</mavencompiler.version>
         <mavensurefirereport.version>2.22.0</mavensurefirereport.version>
         <aspectj.version>1.9.1</aspectj.version>
+        <report.portal.version>4.2.0</report.portal.version>
+        <report.portal.log4j.version>4.0.1</report.portal.log4j.version>
     </properties>
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-epam-reportportal</id>
+            <name>bintray</name>
+            <url>http://dl.bintray.com/epam/reportportal</url>
+        </repository>
+    </repositories>
     <dependencies>
+        <dependency>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>logger-java-log4j</artifactId>
+            <version>${report.portal.log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>agent-java-testng</artifactId>
+            <version>${report.portal.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -53,6 +75,16 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.10.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -77,6 +109,16 @@
                     <argLine>
                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
                     </argLine>
+                    <properties>
+                        <property>
+                            <name>usedefaultlisteners</name>
+                            <value>true</value> <!-- disabling default listeners is optional -->
+                        </property>
+                        <property>
+                            <name>listener</name>
+                            <value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>
+                        </property>
+                    </properties>
                     <systemProperties>
                         <property>
                             <name>allure.results.directory</name>
