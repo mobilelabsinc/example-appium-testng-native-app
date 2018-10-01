@@ -109,16 +109,18 @@
                     <argLine>
                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
                     </argLine>
+                    <!--
                     <properties>
                         <property>
                             <name>usedefaultlisteners</name>
-                            <value>true</value> <!-- disabling default listeners is optional -->
+                            <value>true</value>
                         </property>
                         <property>
                             <name>listener</name>
                             <value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>
                         </property>
                     </properties>
+                    -->
                     <systemProperties>
                         <property>
                             <name>allure.results.directory</name>
