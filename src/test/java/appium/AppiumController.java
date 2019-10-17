@@ -39,20 +39,19 @@ public class AppiumController {
         switch (platform){
             case IOS:
                 capabilities = new DesiredCapabilities();
-                capabilities.setCapability("deviceConnectUserName", username);
-                capabilities.setCapability("deviceConnectApiKey", apiToken);
+                capabilities.setCapability("gigafox:username", username);
+                capabilities.setCapability("gigafox:apiKey", apiToken);
                 capabilities.setCapability("udid", udid);
                 capabilities.setCapability("platformName", platform.toString());
                 capabilities.setCapability("bundleID", bundleID);
                 capabilities.setCapability("automationName", automationName);
-
                 driver = new IOSDriver<MobileElement>(new URL(server), capabilities);
                 break;
 
             case ANDROID:
                 capabilities = new DesiredCapabilities();
-                capabilities.setCapability("deviceConnectUserName", username);
-                capabilities.setCapability("deviceConnectApiKey", apiToken);
+                capabilities.setCapability("gigafox:username", username);
+                capabilities.setCapability("gigafox:apiKey", apiToken);
                 capabilities.setCapability("udid", udid);
                 capabilities.setCapability("platformName", platform.toString());
                 capabilities.setCapability("bundleID", bundleID);
