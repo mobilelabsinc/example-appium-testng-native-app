@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TestPhoneLookup" thread-count="100" verbose="1" parallel="instances"
-       data-provider-thread-count="100" annotations="JDK">
-    <test name="TestPhoneLookup">
+<suite name="TestPhoneLookup" thread-count="100" verbose="1" parallel="tests"
+       annotations="JDK">
+    <parameter name="gigafoxUrl" value="GIGAFOX URL/APPIUM" />
+    <parameter name="gigafoxUser" value="GIGAFOX USER" />
+    <parameter name="gigafoxKey" value="GIGAFOX API TOKEN" />
+    <parameter name="iosBundleId" value="com.mobilelabsinc.PhoneLookup" />
+    <parameter name="androidBundleId" value="com.mobilelabsinc.PhoneLookup/com.mobilelabsinc.PhoneLookup.SplashScreen" />
+    <test name="PHONE NAME">
+        <parameter name="deviceId" value="DEVICE UDID" />
+        <parameter name="deviceOs" value="iOS" />
+        <classes>
+            <class name="TestPhoneLookup"/>
+        </classes>
+    </test>
+    <test name="PHONE NAME">
+        <parameter name="deviceId" value="DEVICE UDID" />
+        <parameter name="deviceOs" value="Android" />
         <classes>
             <class name="TestPhoneLookup"/>
         </classes>
