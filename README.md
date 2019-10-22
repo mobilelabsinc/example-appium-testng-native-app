@@ -5,40 +5,39 @@ Example Appium project using TestNG to allow for parallel cross platform testing
 
 Upload both the Android and iOS PhoneLookup applications to your deviceConnect cart.
 
-## Execution of the sample
+## Configuration of the sample
 
-To execute these tests, you'll need to rename deviceconnect.properties.default to deviceconnect.properties. Once renamed, you'll need to fill in the following information:
+To execute these tests, you'll need to rename testng.xml.default to testng.xml. Once renamed, you'll need to fill in the following information:
 
 ```
-# The deviceConnect server URL
-# i.e. http://192.0.2.0/Appium
-deviceconnect.url=
-
-# Your full username
-# i.e. first.last@sample.company
-deviceconnect.username=
-
-# Your full api token
-# i.e. 00000000-0000-0000-0000-000000000000
-deviceconnect.api.key=
-
-# A comma separated list of one or more iOS device ids
-# i.e. 0123456789012345678901234567890123456789 or
-# 0123456789012345678901234567890123456789,0123456789012345678901234567890123456789
-ios.ids=
-
-# The bundleId for your iOS application
-# i.e. sample.company.App
-ios.bundle.id=
-
-# A comma separated list of one or more Android device ids
-# i.e. 0123456789012 or 0123456789012,0123456789012
-android.ids=
-
-# The bundleId, and Activity, for your Android application
-# i.e. sample.company.App/SampleActivity
-android.bundle.id=
+<parameter name="gigafoxUrl" value="GIGAFOX URL" />
+<parameter name="gigafoxUser" value="GIGAFOX USER" />
+<parameter name="gigafoxKey" value="GIGAFOX API TOKEN" />
 ```
+
+The GIGAFOX URL is the URL or IP address of your GigaFox system with /Appium appended to the end. EX: https://your.gigafox.url/Appium
+The GIGAFOX USER is your GigaFox username, usually your email address
+The GIGAFOX API TOKEN is your GigaFox api token, found on the managing your account page
+
+
+To run tests in parallel against devices create and fill in the following for each device you want to test
+
+```
+<test name="PHONE NAME">
+    <parameter name="deviceId" value="DEVICE UDID" />
+    <parameter name="deviceOs" value="Android" />
+    <classes>
+        <class name="TestPhoneLookup"/>
+    </classes>
+</test>
+```
+
+The PHONE NAME is just the name of the device, it is used only to report the tests for this device
+The DEVICE UDID is the vendor ID found in GigaFox. For iOS this is the UDID, for Android this is the Serial Number
+The deviceOS must match the device type iOS or Android
+
+
+## Test Execution
 
 Run the tests with your IDEs test runner or:
 

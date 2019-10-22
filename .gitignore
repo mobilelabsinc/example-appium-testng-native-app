@@ -94,6 +94,10 @@ Target/**
 .allure/**
 allure-results/**
 
+# Testng.xml - Copy .default and remove .default to testng.xml for testing without having to commit back properties
+src/test/resources/testng.xml
+
+
 # deviceConnect Properties
 deviceConnect.properties
 /target/

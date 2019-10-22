@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TestPhoneLookup" thread-count="100" verbose="1" parallel="tests"
        annotations="JDK">
-    <parameter name="gigafoxUrl" value="GIGAFOX URL/APPIUM" />
+    <parameter name="gigafoxUrl" value="GIGAFOX URL" />
     <parameter name="gigafoxUser" value="GIGAFOX USER" />
     <parameter name="gigafoxKey" value="GIGAFOX API TOKEN" />
     <parameter name="iosBundleId" value="com.mobilelabsinc.PhoneLookup" />
